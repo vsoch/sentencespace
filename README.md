@@ -39,7 +39,7 @@ You will need to [install Docker](https://docs.docker.com/install/) along with [
 
 
 ```
-docker build -t vanessa/sentencespace .
+docker build -t vanessa/sentence-space .
 ```
 
 **UNDER DEVELOPMENT**
