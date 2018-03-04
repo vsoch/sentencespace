@@ -42,7 +42,19 @@ You will need to [install Docker](https://docs.docker.com/install/) along with [
 docker build -t vanessa/sentence-space .
 ```
 
-**UNDER DEVELOPMENT**
+
+#### Development
+If you need to shell interactively into the container to look aroound:
+
+```
+docker run -it vanessa/sentence-space bash
+```
+
+You can also bind the repository in the present working directory (`$PWD`) so that you can make changes locally and they will also change in the container:
+
+```
+docker run -v $PWD:/code -it vanessa/sentence-space bash
+```
 
 ## Usage
 Once the server is running, the API is simple:

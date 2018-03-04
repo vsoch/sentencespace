@@ -76,11 +76,12 @@ sampler = encoder[-1]
 
 start_words = numpy.ones(n) * start_word
 start_words = theano.shared(start_words.astype('int32'))
-#sampled = theano.shared(sampled.astype(theano.config.floatX))
 
 decoder_from_z = model.layers[1].branches[0]
+
 x = T.fmatrix('x')
 from_z = decoder_from_z(x) #sampled.astype(theano.config.floatX))
+# from_z = sampled.astype(theano.config.floatX)
 
 layers = model.layers[-3:]
 layers[0] = LNLSTMStep(layers[0])
