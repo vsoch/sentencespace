@@ -156,7 +156,7 @@ def render_results(w):
                 break
             s.append(vocab.by_index(idx+2)) # THIS IS SO GNARLY
         r = ''.join(s)
-        print r.strip()
+        print(r.strip())
 
         results.append(r)
 
@@ -325,5 +325,3 @@ if __name__ == '__main__':
     #parser.add_argument('-session', type=str)
     args = parser.parse_args()
     main(**vars(args))
-
-

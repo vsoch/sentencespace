@@ -108,13 +108,13 @@ def main(z, lr, net, sample_size, p, clip, nokl):
         model.anneal_end = 1e21
 
     #out = nn.utils.forward(model, train_db, out=model.output(model.input))
-    #print out.shape
+    #print(out.shape)
     #return
 
     print model.total_params
 
     if net == "conv":
-        print "not using clipping for conv model"
+        print("not using clipping for conv model")
         clip = 0.0
 
     name = "vae.%d.%s.%d.%.2f.clip_%d.lr_%.4f" % (z, net, sample_size, p, clip, lr)
