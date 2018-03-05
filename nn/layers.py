@@ -1,7 +1,8 @@
 import theano
 import theano.tensor as T
 from theano.sandbox.rng_mrg import MRG_RandomStreams as RandomStreams
-import theano.gpuarray.dnn as dnn
+#import theano.gpuarray.dnn as dnn
+import theano.sandbox.cuda.dnn as dnn
 import numpy as np
 
 from initializers import Uniform

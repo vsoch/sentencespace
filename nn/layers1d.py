@@ -1,8 +1,8 @@
 import numpy
 import theano
 import theano.tensor as T
-import theano.gpuarray.dnn as dnn
-
+#import theano.gpuarray.dnn as dnn
+import theano.sandbox.cuda.dnn as dnn
 from nn.containers import Sequential
 from nn.initializers import Uniform
 from nn.activations import Gated

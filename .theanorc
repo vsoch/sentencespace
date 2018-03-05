@@ -1,2 +1,7 @@
 [global]
-floatX = float32
+floatX=float32
+
+[dnn]
+bin_path = /usr/include
+include_path = /usr/include
+library_path = /usr/lib/x86_64-linux-gnu

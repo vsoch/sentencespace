@@ -53,6 +53,7 @@ lstm_size = hyper_params["lstm_size"]
 alpha = hyper_params["alpha"]
 dataset = hyper_params["dataset"]
 sp_model = str(hyper_params["sp_model"]) # I get an error below if i don't cast to string...
+print(sp_model)
 
 if sp_model:
     import sentencepiece as spm # https://github.com/google/sentencepiece
