@@ -53,6 +53,7 @@ lstm_size = hyper_params["lstm_size"]
 alpha = hyper_params["alpha"]
 dataset = hyper_params["dataset"]
 sp_model = str(hyper_params["sp_model"]) # I get an error below if i don't cast to string...
+print(sp_model)
 
 if sp_model:
     import sentencepiece as spm # https://github.com/google/sentencepiece
@@ -76,11 +77,12 @@ sampler = encoder[-1]
 
 start_words = numpy.ones(n) * start_word
 start_words = theano.shared(start_words.astype('int32'))
-#sampled = theano.shared(sampled.astype(theano.config.floatX))
 
 decoder_from_z = model.layers[1].branches[0]
+
 x = T.fmatrix('x')
 from_z = decoder_from_z(x) #sampled.astype(theano.config.floatX))
+# from_z = sampled.astype(theano.config.floatX)
 
 layers = model.layers[-3:]
 layers[0] = LNLSTMStep(layers[0])
@@ -156,7 +158,7 @@ def render_results(w):
                 break
             s.append(vocab.by_index(idx+2)) # THIS IS SO GNARLY
         r = ''.join(s)
-        print r.strip()
+        print(r.strip())
 
         results.append(r)
 
@@ -325,5 +327,3 @@ if __name__ == '__main__':
     #parser.add_argument('-session', type=str)
     args = parser.parse_args()
     main(**vars(args))
-
-

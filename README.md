@@ -13,6 +13,7 @@ These are very weird artifacts! If you try to write a sentence gradient by hand,
 
 Again, you'll find a ton more context and exploration in [this post](https://www.robinsloan.com/voyages-in-sentence-space).
 
+## Installation
 This code isn't quite turnkey, but if you're willing to tinker, you should be able to get up and running, training your own models and serving your own gradients, neighborhoods, and who-knows-what-else.
 
 Requirements include:
@@ -25,6 +26,37 @@ Requirements include:
 
 If you have those requirements installed, it _should_ be possible to just run `bash serve.sh` and get a server running. If that's not the case, open an issue and let me know. I definitely want to streamline this over time, and improve this documentation as well.
 
+### Docker
+You can build a Docker image instead of installing locally, and the Docker image has the following changes:
+
+ - the webserver is a separate container (nginx) and they are composed with the [docker-compose.yml](docker-compose.yml) file. The Flask application is run via gunicorn instead of the flask development server.
+ - If you build locally, you can bind the `$PWD` to `/code` so restarting the containers will update with your changes
+ - Any files that you don't want built into the container, you could instead choose to mount at runtime
+ - the scripts have been updated to use python3 (the base image is [continuumio/miniconda3](https://hub.docker.com/r/continuumio/miniconda3/)
+ - the versions of various packages are represented in the [requirements.txt](requirements.txt).
+
+You will need to [install Docker](https://docs.docker.com/install/) along with [Docker Compose](https://docs.docker.com/compose/install/). Then (optionally) build the image. This is optional because we have a pre-built image provided on [Docker Hub]().
+
+
+```
+docker build -t vanessa/sentence-space .
+```
+
+
+#### Development
+If you need to shell interactively into the container to look aroound:
+
+```
+docker run -it vanessa/sentence-space bash
+```
+
+You can also bind the repository in the present working directory (`$PWD`) so that you can make changes locally and they will also change in the container:
+
+```
+docker run -v $PWD:/code -it vanessa/sentence-space bash
+```
+
+## Usage
 Once the server is running, the API is simple:
 
 * `/gradient?s1=Your%20first%20sentence&s2=Your%20second%20sentence`

@@ -1,0 +1,19 @@
+web:
+    image: vanessa/sentence-space
+    restart: always
+    expose:
+      - "5001"
+    volumes:
+      - /code/static
+    command: /opt/conda/bin/gunicorn -w 2 -b :5001 textproject_server:app
+nginx:
+    image: nginx
+    restart: always
+    ports:
+      - "80:80"
+    volumes:
+      - /www/static
+    volumes_from:
+      - web
+    links:
+      - web:web

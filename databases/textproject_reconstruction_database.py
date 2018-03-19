@@ -69,13 +69,13 @@ class TextProjectReconstructionDatabase(object):
         else:
             self.sentences = self.sentences[:valid_size]
 
-        print "%s data: %d sentences, max %d chars" % (phase, len(self.sentences), max_len)
+        print("%s data: %d sentences, max %d chars" % (phase, len(self.sentences), max_len))
 
         self.batches_per_epoch = int(len(self.sentences) / batch_size)
 
         # per the original textvae code, let's just keep this lean
         if self.phase == 'valid':
-            print "Reducing valid set to 100 batches"
+            print("Reducing valid set to 100 batches")
             self.batches_per_epoch = min(self.batches_per_epoch, 100)
 
         self.shuffle_and_make_batches()
@@ -106,7 +106,7 @@ class TextProjectReconstructionDatabase(object):
                 self.batches[i][:, j] = self.to_inputs(batch_source.pop())
                 self.batches[i] = self.batches[i].astype('int32')
                 # there's probably some more efficient way to do that...
-        print "...done. Took %s minutes." % round((time.time() - t)/60)
+        print("...done. Took %s minutes." % round((time.time() - t)/60))
 
     def to_inputs(self, sentence):
         #print(sentence)

@@ -1,8 +1,8 @@
 import numpy
 import theano
 import theano.tensor as T
+#import theano.gpuarray.dnn as dnn
 import theano.sandbox.cuda.dnn as dnn
-
 from nn.containers import Sequential
 from nn.initializers import Uniform
 from nn.activations import Gated
@@ -177,6 +177,9 @@ class Deconvolution1D(object):
             w = self.W * self.mask.dimshuffle('x', 'x', 0, 'x')
         else:
             w = self.W
+        # This is where the bug triggers, the context isn't able to be figured out
+        # for image (Alloc.0) and w ()
+        # function seems pretty broken... GpuArrayType
         conved = dnn.dnn_conv(image, w, subsample=(self.stride, 1), border_mode=(self.pad, 0))
 
         grad = T.grad(conved.sum(), wrt=image, known_grads={conved: x})
